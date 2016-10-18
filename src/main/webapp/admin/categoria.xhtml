@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      template="/template/template.xhtml"
+>
+    
+    <ui:define name="titulo">Categorias</ui:define>
+        
+    <ui:define name="conteudo">
+        <p:tabView>
+        <p:tab title="Cadastarar">
+            <h:form>
+            <h:panelGrid>
+                <p:outputLabel value="Denominação:"/>
+                <p:inputText value="#{categoria.categoria.denominacao}" requiredMessage="Campo denominação obrigatório" validatorMessage="Campo denominação não pode ser superior a 20">
+                    <f:validateLength maximum="20"/>
+                </p:inputText>
+                <br></br>
+                <p:outputLabel value="Descrição"/>
+                <br></br>
+                <p:inputTextarea value="#{categoria.categoria.descricao}" rows="3" cols="50" counter="display" maxlength="150" counterTemplate="Restam {0} caracteres" autoResize="false">
+                    
+                </p:inputTextarea>
+                <br></br>
+                <h:outputText id="display"/>
+                <br></br>
+                <p:commandButton value="SALVAR" icon="ui-icon-disk" action="#{categoria.salvar}" ajax="false"/>
+            </h:panelGrid>
+                </h:form>
+        </p:tab>
+        <p:tab title="Categorias">
+            <h:form>
+            <h:panelGrid columns="2" cellpadding="10">
+                <p:dataTable var="obj" value="#{categoria.listaCompleta}" scrollable="true" scrollHeight="300">
+                    <p:column headerText="Id">
+                        <h:outputText value="#{obj.id}" />
+                    </p:column>
+                    <p:column headerText="Denominação">
+                        <h:outputText value="#{obj.denominacao}" />
+                    </p:column>
+                    <p:column headerText="Descrição">
+                        <h:outputText value="#{obj.descricao}" />
+                    </p:column>
+                    <p:column headerText="Ação">
+                        <p:commandButton icon="ui-icon-search" ajax="false" action="#{categoria.selecionar(obj)}" />
+                        <p:commandButton icon="ui-icon-trash" ajax="false" action="#{categoria.deletar(obj)}" onclick="return confirm('Confirma Exclusão?')" />
+                    </p:column>
+
+                </p:dataTable>
+            </h:panelGrid>
+            </h:form>
+        </p:tab>
+        </p:tabView>
+    </ui:define>
+</ui:composition>

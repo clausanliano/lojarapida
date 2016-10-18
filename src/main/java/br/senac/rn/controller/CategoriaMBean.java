@@ -5,7 +5,7 @@ import javax.faces.bean.ManagedBean;
 import br.senac.rn.dao.CategoriaDAO;
 import br.senac.rn.model.Categoria;
 
-@ManagedBean
+@ManagedBean (name = "categoria")
 public class CategoriaMBean extends AbstractController<Categoria> {
 
     private Categoria categoria = new Categoria();
@@ -30,14 +30,16 @@ public class CategoriaMBean extends AbstractController<Categoria> {
     public String salvar() {
         CategoriaDAO dao = new CategoriaDAO();
         try {
-            if (categoria.getId()==0) {
+            if (categoria.getId() == 0) {
                 dao.create(categoria);
-                categoria = new Categoria();
+                addInfo(categoria.toString() + "Categoria INSERIDA com sucesso!");
             } else {
                 dao.update(categoria);
+                addInfo(categoria.toString() + "Categoria EDITADA com sucesso!");
             }
-            addInfo("Categoria salva com sucesso!");
+            
         } finally {
+            categoria = new Categoria();
             dao.close();
         }
         return null;

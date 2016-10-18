@@ -29,7 +29,7 @@ public class Categoria implements PersistDB {
     }	
 
     public int getId() {
-        return id;
+        return this.id;
     }
 
     public void setId(int id) {
@@ -51,5 +51,12 @@ public class Categoria implements PersistDB {
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
+
+    @Override
+    public String toString() {
+        return "Categoria{" + "id=" + id + ", denominacao=" + denominacao + ", descricao=" + descricao + '}';
+    }
+    
+    
     
 }

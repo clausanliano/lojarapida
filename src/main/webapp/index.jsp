@@ -1,1 +1,1 @@
-<% response.sendRedirect("admin/principal.xhtml"); %>
+<% response.sendRedirect("admin/principal.html"); %>
